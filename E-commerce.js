@@ -790,6 +790,14 @@ function addToCart() {
     }, 3000);
 }
 
+//buy now function
+function buyNow() {
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const product = productData[currentProductId];
+    const totalPrice = parseFloat(product.price.replace('₹', '').replace(',', '')) * quantity;
+    alert(`Thank you for your purchase!\n\nProduct: ${product.title}\nQuantity: ${quantity}\nTotal Price: ₹${totalPrice.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`);
+}
+
 // Update cart display
 function updateCart() {
     cartCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -879,4 +887,5 @@ function filterProducts(category) {
             product.style.display = 'none';
         }
     });
+
 }
