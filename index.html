@@ -1,509 +1,21 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - Premium Electronics</title>
+    <title>LNT-Project1</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #fbbf24;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --border-color: #e5e7eb;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-dark);
-            background-color: #f9fafb;
-        }
-
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 1rem 0;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 4rem 0;
-            margin-bottom: 3rem;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            opacity: 0.95;
-        }
-
-        /* Product Grid */
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-            height: 100%;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
-        }
-
-        .product-image-wrapper {
-            position: relative;
-            height: 250px;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .product-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            padding: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.1);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #ef4444;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-category {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .product-rating {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .product-price {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .product-original-price {
-            font-size: 1rem;
-            text-decoration: line-through;
-            color: var(--text-light);
-            margin-left: 8px;
-        }
-
-        /* Product Detail Page */
-        .product-detail-page {
-            display: none;
-        }
-
-        .product-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            padding: 2rem;
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .back-button {
-            background: white;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 2rem;
-        }
-
-        .back-button:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .main-image-container {
-            position: relative;
-            background: #f8f9fa;
-            border-radius: 8px;
-            overflow: hidden;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-        }
-
-        .main-image {
-            max-width: 100%;
-            max-height: 450px;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-
-        .main-image:hover {
-            transform: scale(1.05);
-        }
-
-        .thumbnail-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            cursor: pointer;
-            object-fit: cover;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-            padding: 5px;
-        }
-
-        .thumbnail:hover, .thumbnail.active {
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
-        }
-
-        .product-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 1rem 0;
-        }
-
-        .original-price {
-            font-size: 1.5rem;
-            text-decoration: line-through;
-            color: var(--text-light);
-            margin-left: 10px;
-        }
-
-        .discount-badge {
-            background: #ef4444;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        .rating-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 1rem 0;
-        }
-
-        .stars {
-            color: var(--accent-color);
-            font-size: 1.2rem;
-        }
-
-        .rating-text {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
-
-        .feature-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-        }
-
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-
-        .feature-list li i {
-            color: var(--primary-color);
-            margin-right: 12px;
-            font-size: 1.1rem;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 1.5rem 0;
-        }
-
-        .qty-btn {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--border-color);
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .qty-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        .qty-input {
-            width: 60px;
-            text-align: center;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 8px;
-            font-weight: 600;
-        }
-
-        .add-to-cart-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .add-to-cart-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-        }
-
-        .buy-now-btn {
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            padding: 1rem 3rem;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-
-        .buy-now-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .review-section {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .review-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .review-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-
-        .reviewer-name {
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .review-date {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        .review-stars {
-            color: var(--accent-color);
-            margin: 0.5rem 0;
-        }
-
-        .specs-table {
-            margin: 2rem 0;
-        }
-
-        .specs-table td {
-            padding: 12px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .specs-table td:first-child {
-            font-weight: 600;
-            width: 30%;
-        }
-
-        .toast-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-            display: none;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-dark);
-        }
-
-        .in-stock {
-            color: #10b981;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .shipping-info {
-            background: #eff6ff;
-            border-left: 4px solid var(--primary-color);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .category-filter {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .category-btn {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--border-color);
-            background: white;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .category-btn:hover, .category-btn.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="E-commerce.css">
+ </head>
 <body>
-    <!-- Navigation -->
+     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#" style="color: var(--primary-color);" onclick="showHomePage()">
                 <i class="fas fa-shopping-bag"></i> TechStore
             </a>
             <div class="d-flex align-items-center">
-                <button class="btn position-relative me-3">
+                <button class="btn position-relative me-3" onclick="toggleCart()">
                     <i class="fas fa-shopping-cart fs-5"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">
                         0
@@ -519,9 +31,8 @@
 
     <!-- Slides -->
     <img src="https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg" class="slide" style="width: 100%; height: 300px; object-fit: cover; display: inline;">
-    <img src="https://rukminim1.flixcart.com/fk-p-flap/3240/540/image/5ab0f654d9161154.jpg?q=60" class="slide" style="width:100%; height:300px; object-fit:cover; display:none;">
-    <img src=" https://www.shutterstock.com/image-photo/chicago-illinois-usa-october-24-600nw-2664366765.jpg" class="slide" style="width:100%; height:300px; object-fit:cover; display:block;">
     <img src="https://wallpapers.com/images/hd/e-commerce-1920-x-1080-wallpaper-tb4uqckgoo0883zw.jpg" class="slide" style="width:100%; height:300px; object-fit:cover; display:none;">
+    <img src="https://c8.alamy.com/comp/G3EC9C/e-commerce-concept-with-shopping-cart-G3EC9C.jpg" class="slide" style="width:100%; height:300px; object-fit:cover; display:none;">
     <img src="https://plus.unsplash.com/premium_photo-1681488262364-8aeb1b6aac56?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWNvbW1lcmNlfGVufDB8fDB8fHww" class="slide" style="width:100%; height:300px; object-fit:cover; display:none;">
     <img src="https://rukminim1.flixcart.com/fk-p-flap/3240/540/image/bac6e385f3bd157c.jpeg?q=60" class="slide" style="width:100%; height:300px; object-fit:cover; display:none;">
 
@@ -534,50 +45,7 @@
     <div class="dots" style="position:absolute; bottom:10px; width:100%; text-align:center;">
     </div>
 </div>
-
-<script>
-let slideIndex = 0;
-const slides = document.querySelectorAll(".slide");
-const dotsContainer = document.querySelector(".dots");
-
-// Create dots
-slides.forEach((s, i) => {
-    const d = document.createElement("span");
-    d.classList.add("dot");
-    d.style.cssText = "height:10px; width:10px; background:#bbb; display:inline-block; border-radius:50%; margin:5px; cursor:pointer;";
-    if (i === 0) d.style.background = "#000";
-    d.addEventListener("click", () => showSlide(i));
-    dotsContainer.appendChild(d);
-});
-
-const dots = document.querySelectorAll(".dot");
-
-function showSlide(n) {
-    slides.forEach((s) => (s.style.display = "none"));
-    dots.forEach((d) => (d.style.background = "#bbb"));
-
-    slideIndex = n;
-    slides[n].style.display = "block";
-    dots[n].style.background = "#000";
-}
-
-function nextSlide() {
-    slideIndex = (slideIndex + 1) % slides.length;
-    showSlide(slideIndex);
-}
-
-document.querySelector(".next").onclick = nextSlide;
-
-document.querySelector(".prev").onclick = () => {
-    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-    showSlide(slideIndex);
-};
-
-// Auto run slider
-setInterval(nextSlide, 3000);
-</script>
-
-
+ 
         <!-- Category Filter -->
         <div class="container" style="padding: 50px;">
             <div class="category-filter">
@@ -587,6 +55,7 @@ setInterval(nextSlide, 3000);
                 <button class="category-btn" onclick="filterProducts('phones')">Phones</button>
                 <button class="category-btn" onclick="filterProducts('earbuds')">Earbuds</button>
                 <button class="category-btn" onclick="filterProducts('bottles')">Bottles</button>
+                <button class="category-btn" onclick="filterProducts('electronics')">electronics</button>
             </div>
 
             <!-- Product Grid -->
@@ -610,8 +79,8 @@ setInterval(nextSlide, 3000);
                                 <span class="text-muted ms-1">(2,847)</span>
                             </div>
                             <div>
-                                <span class="product-price">₹69,999.99</span>
-                                <span class="product-original-price">₹104,999.99</span>
+                                <span class="product-price">₹4,999.99</span>
+                                <span class="product-original-price">₹9,999.99</span>
                             </div>
                         </div>
                     </div>
@@ -666,7 +135,6 @@ setInterval(nextSlide, 3000);
                         </div>
                     </div>
                 </div>
-
                 <!-- Wireless Earbuds -->
                 <div class="col-lg-4 col-md-6 product-item" data-category="earbuds">
                     <div class="product-card" onclick="showProductDetail('earbuds')">
@@ -686,13 +154,12 @@ setInterval(nextSlide, 3000);
                                 <span class="text-muted ms-1">(4,182)</span>
                             </div>
                             <div>
-                                <span class="product-price">₹899.99</span>
-                                <span class="product-original-price">₹1499.99</span>
+                                <span class="product-price">₹1,999.99</span>
+                                <span class="product-original-price">₹2,499.99</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Smart Water Bottle -->
                 <div class="col-lg-4 col-md-6 product-item" data-category="bottles">
                     <div class="product-card" onclick="showProductDetail('bottle')">
@@ -717,10 +184,9 @@ setInterval(nextSlide, 3000);
                             </div>
                         </div>
                     </div>
-                </div>
-                
+                </div>  
                 <!-- TV -->
-                <div class="col-lg-4 col-md-6 product-item" data-category="phones">
+                <div class="col-lg-4 col-md-6 product-item" data-category="electronics">
                     <div class="product-card" onclick="showProductDetail('tv')">
                         <div class="product-image-wrapper">
                             <span class="product-badge">18% OFF</span>
@@ -740,17 +206,16 @@ setInterval(nextSlide, 3000);
                             <div>
                                 <span class="product-price">₹54,999.99</span>
                                 <span class="product-original-price">₹66,999.99</span>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                
+                             </div>
+                         </div>
+                     </div>
+                 </div> 
                 <!-- Tablet -->
-                <div class="col-lg-4 col-md-6 product-item" data-category="phones">
-                    <div class="product-card" onclick="showProductDetail('tablet')">
-                        <div class="product-image-wrapper">
-                            <span class="product-badge">30% OFF</span>
-                            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTjlZjXao4xYj86SGkHR-4y8jQBIGmnDPLGActkD1pWQR5NuDO1YwgCuvYhn1JIcG4QGtbdjTqE4Qp5apg-C2F7ty_NyIDjqfPnnCnNP95xL9kE79cY1Gw5" alt="Tablet" class="product-image">
+                     <div class="col-lg-4 col-md-6 product-item" data-category="phones">
+                         <div class="product-card" onclick="showProductDetail('tablet')">
+                             <div class="product-image-wrapper">
+                                <span class="product-badge">30% OFF</span>
+                                 <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTjlZjXao4xYj86SGkHR-4y8jQBIGmnDPLGActkD1pWQR5NuDO1YwgCuvYhn1JIcG4QGtbdjTqE4Qp5apg-C2F7ty_NyIDjqfPnnCnNP95xL9kE79cY1Gw5" alt="Tablet" class="product-image">
                         </div>
                         <div class="product-info">
                             <div class="product-category">Mobile</div>
@@ -764,22 +229,196 @@ setInterval(nextSlide, 3000);
                                 <span class="text-muted ms-1">(2,156)</span>
                             </div>
                             <div>
-                                <span class="product-price">₹17499.99</span>
-                                <span class="product-original-price">₹19999.99</span>
+                                <span class="product-price">₹1,7499.99</span>
+                                <span class="product-original-price">₹19,999.99</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Detail Page -->
-    <div id="productDetailPage" class="product-detail-page">
-        <div class="container">
-            <button class="back-button" onclick="showHomePage()">
-                <i class="fas fa-arrow-left"></i> Back to Products
-            </button>
+                <!-- mobile -->
+                   <div class="col-lg-4 col-md-6 product-item" data-category="phones">
+                       <div class="product-card" onclick="showProductDetail('mobile')">
+                             <div class="product-image-wrapper">
+                              <span class="product-badge">12% OFF</span>
+                              <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTpFe28rl_nuXvDvrh0WW8uJ2Le8MZmQF2gkoFM_bETuiLXmvnzHFXwi1Mg5SEjzre6EPEWscIk6cvtfSoDECnppgS8qKTM" alt="mobile" class="product-image">
+                         </div>
+                        <div class="product-info">
+                            <div class="product-category">Mobile</div>
+                            <h3 class="product-name">iPhone 16 Pro</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-muted">(4,567)</span>
+                            </div>
+                            <div>
+                                <span class="product-price">₹1,03,999.99</span>
+                                <span class="product-original-price">₹1,09,999.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <!-- AC -->
+                    <div class="col-lg-4 col-md-6 product-item" data-category="electronics">
+                        <div class="product-card" onclick="showProductDetail('ac')">
+                            <div class="product-image-wrapper">
+                                <span class="product-badge">22% OFF</span>
+                                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTYBoQhJOreRiTEEdjI5-bjDqjs_2c7IIClbRoZ6b3nqiDgTFmFmB0SNYlsHUp4-vKPCD1aEAU0exHzf5kBX0ssZyATPoQXqgx0r_0FA2E8IzF5jVF60P6HZTk" alt="AC" class="product-image">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">AC</div>
+                                <h3 class="product-name">Samsung AC 1.5 Ton</h3>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-muted">(1,234)</span>
+                                </div>
+                                <div>
+                                    <span class="product-price">₹39,999.99</span>
+                                    <span class="product-original-price">₹49,999.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                <!-- fridge -->
+                    <div class="col-lg-4 col-md-6 product-item" data-category="electronics">
+                        <div class="product-card" onclick="showProductDetail('refridgrator')">
+                            <div class="product-image-wrapper">
+                                <span class="product-badge">28% OFF</span>
+                                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR8acPQWylGt98EaSUca3DqSkU75GVi4PjLskVS6MuqB_CmwWPSnH5OfNtdaDFPj9V3Zg6VDbFGQSW7y_HRCIKTPtgCqwGyeLT-KEZCIe9M7SVvjfE74vj3rQ" alt="Fridge" class="product-image">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Fridge</div>
+                                <h3 class="product-name">Whirlpool Intellifresh Pro 2 Star Double Door Refrigerator</h3>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-muted">(890)</span>
+                                </div>
+                                <div>
+                                    <span class="product-price">₹34,999.99</span>
+                                    <span class="product-original-price">₹44,999.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- washing machine   -->
+                    <div class="col-lg-4 col-md-6 product-item" data-category="electronics">
+                        <div class="product-card" onclick="showProductDetail('washingMachine')">
+                            <div class="product-image-wrapper">
+                                <span class="product-badge">26% OFF</span>
+                                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ47LeKimvNZXm4fUvcRNq5liv3mjdIMn3BnX0OxxTh4jBgEjqS3c4efmIN8jPIjClEsZ4XuWLihX2VK8JwQooxzWdc6ALP" alt="Washing Machine" class="product-image">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Washing Machine</div>
+                                <h3 class="product-name">Samsung 7 KG Fully Automatic Front Load Washing Machine</h3>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-muted">(1,102)</span>
+                                </div>
+                                <div>
+                                    <span class="product-price">₹29,999.99</span>
+                                    <span class="product-original-price">₹36,999.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- laptop   -->
+                     <div class="col-lg-4 col-md-6 product-item" data-category="electronics">
+                        <div class="product-card" onclick="showProductDetail('laptop')">
+                            <div class="product-image-wrapper">
+                                <span class="product-badge">60% OFF</span>
+                                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ6YqI8lFKkCzy2zYWmecMDN77tpVkqDwcyrrvziL1_dj-K5Oo__56U41rcNdwRu6i7Egy0w743ISn7bIXfC2mfio3mpedwuPa3RUoDyuAuc7CyX4GMU4vE" alt="laptop" class="product-image">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Laptop</div>
+                                <h3 class="product-name">Acer Predator Helios Neo 14 Intel Core Ultra 7 Gaming Laptop</h3>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span class="text-muted">(892)</span>
+                                </div>
+                                <div>
+                                    <span class="product-price">₹1,12,990</span>
+                                    <span class="product-original-price">₹2,85,774</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- android watch -->
+                     <div class="col-lg-4 col-md-6 product-item" data-category="watches">
+                        <div class="product-card" onclick="showProductDetail('androidWatch')">
+                            <div class="product-image-wrapper">
+                                <span class="product-badge">15% OFF</span>
+                                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQBbgxwRTzG3IxwBnUd0HaYl2oSzc01aL9PPXUMqYlSk14akhRYXlGQ_327lFSIkojaktCI0YjvbpdnPUHn3l1z7yzwUzcMyU-jdkL_6-vTnyFMXqgAhJ-Seg" alt="watch" class="product-image">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Wearables</div>
+                                <h3 class="product-name">boAt Lunar Discovery Smartwatch</h3>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-muted">(1,256)</span>
+                                </div>
+                                <div>
+                                    <span class="product-price">₹1,199.99</span>
+                                    <span class="product-original-price">₹1,499.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- earbuds -->
+                        <div class="col-lg-4 col-md-6 product-item" data-category="earbuds">
+                            <div class="product-card" onclick="showProductDetail('earbuds2')">
+                                <div class="product-image-wrapper">
+                                    <span class="product-badge">35% OFF</span>
+                                    <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQY_3k2zW4KSYN-VAI0F52duOC2JtHViTl2bnpoEuNoHBH1gvilyB6ZMaVtrHiQdgygv1ztZYhfPHfVPa0KRLCL4T5ZAy3p" alt="earbuds" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Audio</div>
+                                    <h3 class="product-name">CMF by Nothing Neckband Pro 50dB Active Noise Cancellation</h3>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="text-muted">(3,014)</span>
+                                    </div>
+                                    <div>
+                                        <span class="product-price">₹1,199.99</span>
+                                        <span class="product-original-price">₹1,499.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+                    <!-- Product Detail Page -->
+        <div id="productDetailPage" class="product-detail-page">
+                 <div class="container">
+                      <button class="back-button" onclick="showHomePage()">
+                      <i class="fas fa-arrow-left"></i> Back to Products
+                    </button>
 
             <div class="product-container">
                 <div class="row">
@@ -858,463 +497,34 @@ setInterval(nextSlide, 3000);
     <div id="toast" class="toast-notification">
         <i class="fas fa-check-circle"></i> Added to cart successfully!
     </div>
-           
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-    // Show add cart
+
     
-
-        // Initialize cart
-        let cart = [];
-        let cartCount = 0;
-        let selectedPaymentMethod = null;
-        let currentProduct = null;
-
-    const productData = {
-            headphones: {
-                title: " Bowers & Wilkins Px8 ANC Wireless Over-Ear Headphones",
-                price: "₹69,999.99",
-                originalPrice: "₹104,999.99",
-                discount: "33% OFF",
-                rating: "4.7 (2,847 reviews)",
-                stars: 4.5,
-                description: "Experience superior sound quality with our Premium Wireless Headphones featuring advanced active noise cancellation, 40-hour battery life, and premium comfort design. Perfect for music lovers, travelers, and professionals.",
-                images: [
-                    " https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSqXw3hWjWB4Q6_9jLjxAFaGRSaUx7vkOO7p_LU2940i99WedPlCmB-QEvT4VbaIij9jBTxzQcKg5bKwW5510vPfPaydRkY9ijXe6eEzptK3KHAg4MMcJZiCg",
-                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSg2G68jWyvKDOcI6oV2aUhnu1hQ7qf2wx0byRCToU_OTs2fviNakrS4L9peZxJ5qwCTskM1pQt2anJGwVy3LJaz7621uJfwf2rzUSKjkYhzS-PAR_KGvEDjA",
-                     "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRfraqctMH8BlJoPCcSK05pqvg7JmXR8j9DZFp4NlVmBxAI5ls3iT6aENwC5tPJkOoYSDL_fsIDl5pm0LMYBav8AeUFBrnZLt4JE5ZZCgNaawnPxWI_KJCQ",
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSFpdf6wxYTKKVp34FbjQBXSJq64fpAaH09MEY06z9rBEIaO1X6ge1M3-95oPb6XVDHB3ArHMF0erREDddG7sASHjducXM8rCDnkyBKWs6HT564F9JAPOUPmm0",
-                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRnfllIHB4OIlXDF-kRB-HUFUvXBll7_Xe2xDZXHSCZ5NjeXaJMo446-pToKOXNjQRQ4HwGp1_5__xeAmPIHpaiv9QTSpL9f5qYpN_cK_LWge_sebOkNbYd2Xs",
-                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcScWajpAPWru8IxNfDwjH1hgyBkIDdaRb6xaEFVGebzK5wgJ9IPRxlZMl3GfPDLalQrDENlLA9IxOAkI8Gx7Kaqo-LHMwKaC4Bri1wELz8mP-PzXTQmIkQhtks",
-                     "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQF76RVkTpnZlFS0NmzFStj7xdKSqJXNsJo7rCfhZNvSc1V7bfcSfm-yKpdnzWTFPVtnTO-la4tNws810qIwv1areS0YQRv5LhzQW5WPQzn7jqMAdoUyjVqIA",
-                     "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRNscLjzdQpnO_7NP5quDbXe2pM-eK4aeDgyQEKujQdh55oLhG-ujkIoHDWyj1tKwTQsGrWrI84VE5TKwI3VnprHNPo7tTw2hof1jxwubkPTwSwLx18Ebv25uk",
-                     "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSqmGoXZ9VY35wsJwpOVA1pEj8ErOF4H8DUUgpuXb7ZgVgia--QUEUQDN7Ok4zTnPCEvyEzmTSSvgYKkTeDmZe6jW_SeFj5N3CQEkcvLw",
-                     "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSe_AUukh8AXBwyda00SL3qKwc3wPkCBbxVV_e5hNITPtzMq_pJIiiqj1aKtv1VTAshxZcuq9Atsn1bvKDLiXIMYu7PE7QPI1hF4VC6vOEKD6jqrCZfDg75HQ",
-                     "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSe4xeVp0PAqsykXySzs1zexG5AKzaFCh_PT28FulcdaymqpDUD83mV8U7hgj1uviS6ROS9smTnkv8fqrCye9gNOeBfJCOTsFFRor1oYso6Tw6yuQEP4saH",
-                     "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTIAambOgZ3fMh7a4MSnBh_bRLDaaulhOlx34rc3JBbJNgAeCGoc2cFJ8PewgeNAc3UASvY8Bw4ms0wyi5-ICLUH4FQu7XgVtSLaeip1u5A1jcK9qU6Ttq1",
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTYwtiRMyQ6BHt4Cl7i9IWAT00rCbpgRxUl_4TgJyCy39IBmTOmfIcTo7VRw2xpJEOTcbcJ50EFl8CiyYwREUsE27lmzak256Ly0JTV4XGZppSoGY2Ut41q",
-                     "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTd6NuMGbJBeD0iGEXM14MuEkyfiDFI1GR_CFNtxTOHwwKBqt2z8YWI8WZr7sdTZw-GoSeK4zWLB_54EUnIjEMiKkzWanpYJsvNNK1k39J3"
-                ],
-                features: [
-                    { icon: "volume-up", text: "<strong>Active Noise Cancellation</strong> - Block out distractions" },
-                    { icon: "battery-full", text: "<strong>40-Hour Battery Life</strong> - All-day listening" },
-                    { icon: "bluetooth-b", text: "<strong>Bluetooth 5.2</strong> - Seamless connectivity" },
-                    { icon: "microphone", text: "<strong>Built-in Microphone</strong> - Crystal clear calls" },
-                    { icon: "headphones", text: "<strong>Premium Comfort</strong> - Memory foam ear cushions" }
-                ],
-                specs: [
-                    ["Driver Size", "40mm dynamic drivers"],
-                    ["Frequency Response", "20Hz - 20kHz"],
-                    ["Impedance", "32 Ohms"],
-                    ["Bluetooth Version", "5.2"],
-                    ["Battery Life", "40 hours (ANC on), 50 hours (ANC off)"],
-                    ["Charging Time", "2 hours (USB-C fast charging)"],
-                    ["Weight", "250g"]
-                ],
-                reviews: [
-                    { name: "Sarah Johnson", date: "Nov 28, 2024", stars: 5, text: "Amazing sound quality! The noise cancellation is outstanding and the battery life is exactly as advertised. These headphones are perfect for my daily commute and work from home setup." },
-                    { name: "Michael Chen", date: "Nov 25, 2024", stars: 4.5, text: "Very comfortable for long listening sessions. The build quality feels premium and durable. Only minor issue is the carrying case could be a bit more compact." },
-                    { name: "Emma Williams", date: "Nov 20, 2024", stars: 5, text: "Best purchase I've made this year! The ANC is incredible - I can finally focus in my noisy office. Setup was super easy and the Bluetooth connection is rock solid." }
-                ]
-            },
-            watch: {
-                title: "Redmi Watch 5 Active",
-                price: "₹1,499.99",
-                originalPrice: "₹1,999.99",
-                discount: "25% OFF",
-                rating: "5.0 (1,523 reviews)",
-                stars: 5,
-                description: "Track your fitness goals with precision using our Smart Fitness Watch. Features continuous heart rate monitoring, GPS tracking, sleep analysis, and 14-day battery life. Water-resistant up to 50 meters.",
-                images: [
-                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSdRdRFtHsNP3gwDK6XLD8yAMyy_CjyCEHMubj8-YB48k5efBoU_9uNhTnKCRsWyxfCCvzIqoOxQKIdBkkQzQ1ooZ6a2Sl2-W0oujX9ZJiznBF9uZl-DKRZu6wR",
-                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ9XxdQw0j_dOpAVhFp4N3Y9Eaoh2SeZ58gBD4M5EXD8t9dpG9xjJYsHJcW65jC2Zl8x9VHjvet4yO41pue7SBouf9UvXeeQHqflro4MnzA_BV8Amp0sR63tw",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSyX2liTrRNpHB8rvVL3MBDmFb61_K2KkQPg2ZT9UGxM-0exP52o9ZDR6k8eBSMSD9MxO1cK1rXWb2LGS18LKdSX1tXXgD6sQcw2S0Cr5Tk",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQsF5m6k8bRTKsH_FePdPNS9GcHrQ1K7kmylXyqyPBXmxhOrLvysDKGmLOiOXxIOAlaswawltD1PT3ovv4aBarZspTBGwsRcwmFjWcle5O8_qsMya13E3vq",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbzGfiItVOr5cZT_UqBTlWDBgAZi4ANbso_XZPlxjiIvmTgXp7AhoY_udPyT5U25BCkhSIJsO4bxHDN5gbUL3eRodLaXY_EOiO8VDUpnAcNp497Q49AmaPCA",
-                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcT-PNpwI8migiJ_mCmLuxI6KgtVPyW6hmvqpprB_y5FqUGCADaYqutlZs6TftU24kjuZ8fKz2KO6ySn-HmMMCGw7VfUv2fqe65nT9lDs9YZB4i-6aXWzyOv",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTYYlo0XDZB_s3D_plZ_xc7MWoFX87Cs_yRXJ90-gSYHiYncFMmnyj_RazUwrZ0dM6WvC92sYua53a-n6e_3182IgYBwd-tideddIxFYHNKz2zeXAlJ8-JX5g",
-                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTgq7VcNmj7oiFbh9mqcoHd2AUIZ1dYe_WiS7JVgL9USTANoNyv4IaxSMuFVzLpLm1Azc2UmYf6t6CaklQPCC5vmkgmIJMaJFsMZ7_3JDE",
-                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRUkhpsBJJAez0w7gTBxI9n1ZYmBbCdWZdVLT6cFPtv28ZHwQjvMu5v1VRoH1dBFaLKG1bnHiADrgeVXECbyIybA2bSl8VC3DcTQ5ez446t",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQbff6fpYmWAW9jpKCdGdP0BAzxkRjJGwJ1OI4dsfOPdtk9c4RgEc0hrY7ep0gFr7vTc5izyAj0lVmxJEznIyCQJOIP8O7g0Cis_aH9XiWpG_my0HbGsg5I",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRMhhWch-_WonIlP9AhwsXTlNlCreYj3ZY1nooTQDkEfjuQ6xKQHM7h04xRVKcb7BpJtVBF8m1b8lUzHqA1Raz5oye-eiNPXg0xHVs8HKw",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTm0X7AbTasoQznQJasLbmb_Q1Tf99S_uZHwP4a11iTDvYZW2wtwfhYvIRhs4wdp6leKZc989YXQ7sn1z1jvJtdsJ_ChAyxLBSwIhAvYqDkwRUWaQ0eBUuy",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQd9sahTRV8kZN9BP0a5ZivaqaEDhELumQZ6eSMv3tJHwUJUTdW7PGozQhHHHMFsvFdRsR7TyvXfpRo9j4VsqyNJAdx-v1il3zQK4XoVd3p",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTtMtUR-Az-oSUlWhDorgkQfV0r_K-7M7C1VzpkV0AyizDH_F2Iy_XGpaRFYDbLajIMlai-zt4oTfn0HDa6IGbFFnXL6Gglj1rNDiLes-I"
-                ],
-                features: [
-                    { icon: "heartbeat", text: "<strong>Heart Rate Monitor</strong> - 24/7 tracking" },
-                    { icon: "running", text: "<strong>100+ Sport Modes</strong> - Track any activity" },
-                    { icon: "map-marked-alt", text: "<strong>Built-in GPS</strong> - Route tracking" },
-                    { icon: "bed", text: "<strong>Sleep Analysis</strong> - Improve your rest" },
-                    { icon: "tint", text: "<strong>Water Resistant</strong> - 50M waterproof" }
-                ],
-                specs: [
-                    ["Display", "1.4-inch AMOLED touchscreen"],
-                    ["Battery Life", "14 days typical use"],
-                    ["Water Resistance", "5 ATM (50 meters)"],
-                    ["Connectivity", "Bluetooth 5.0"],
-                    ["Sensors", "Heart rate, GPS, Accelerometer, Gyroscope"],
-                    ["Compatibility", "iOS 12+ and Android 6+"],
-                    ["Weight", "42g"]
-                ],
-                reviews: [
-                    { name: "David Park", date: "Dec 1, 2024", stars: 5, text: "Excellent fitness tracker! The heart rate monitor is accurate and the GPS tracking works flawlessly. Battery life is impressive." },
-                    { name: "Lisa Martinez", date: "Nov 29, 2024", stars: 5, text: "Love this watch! So many features for the price. The sleep tracking has really helped me improve my sleep habits." },
-                    { name: "James Wilson", date: "Nov 26, 2024", stars: 5, text: "Best smartwatch I've owned. The display is bright and clear, even in sunlight. Highly recommend for anyone serious about fitness." }
-                ]
-            },
-            phone: {
-                title: " Vivo V60 5G",
-                price: "₹36,999.99",
-                originalPrice: "₹43,529.99",
-                discount: "15% OFF",
-                rating: "4.7 (3,241 reviews)",
-                stars: 4.5,
-                description: "Experience the future with our Latest Smartphone Pro. Features a stunning 6.7-inch OLED display, triple-camera system with AI enhancement, 5G connectivity, and all-day battery life. Lightning-fast performance with the latest processor.",
-                images: [
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQtqlrAKH7PMDwoLdUjU5_9qRbv9wzyHNh4hZ2nUGRLoj5cZlHJ1Ismx9XSSDXrKEeGn7_6ym__p2tW2r5tU0hUVvv_dXsd_ShY-eEIOrgwuulVIbK9asUH",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT-RdlxO_kaDtB2V-zAA0K6EvP974XblTqTz_GrjuF6q-J3matGqExUrqm15tsuW4qq0B3c-IBeTTxwXC9_pO08V_AccPEyLN7JE4yewQSZlNLFy7CkLKV8Uw",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ0D8XDrMQRIjkHsiJhd3leZ7UDV6geBOeldKV4MSWVHlC0sLasyaH1811SBj7jsl7gbr4AEc7Gj6S9PDmL-CovLfXDakpdWSt4HylpUyuQBeYox-TjqDZk2A",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3FyzaSpNqtgPA1HZdlqzym-wOAXPaCld-uOINytkGK_bEd9JmwZ9bGbfoiVeQdcF1paYH-EsIzA3TjtRsEKDkErFZuHXEDPMDJI1CXG3JwWeLeR4spUp9",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ95vcLpiIR78P9oHc7woEB7u_O95FKhSG0Pk9tFgibyaUM7Xm7Ue-awyctSKhmNdO4Ac5HgOWIRRHP7zTOtcOiyZJI6aaDAROL5XZ8O90a",
-                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQfSdRbzd5256gYixwc_GxAK88fCAhgdZe7hJAPjJEKsherzW_2JFnjhWNjEC-gvcBfVc8AlRz5RsSETtbwX3biObY1WsPVMXZTJOFr0E9nDFrU5SH4ooBsCQ",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS3fil_yQG0nYQR5DC4l0HXQdhD9VtY40hwSPLYlXOG4y3v09CfO242IWV7FhxHTF6QDWBR9lBrCXJDaOhrBpbzqCkCpRqewK_ZMvmPuMV0hS0jG6UwXyZ6Dwc",
-                    "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTYoIOOUJEkTRuHICDvjELYYF9WxQNpY7fH_dPe2TvNRf2ZOL3Ni7BWPXNo9e_bIMvxTv7tcYyraZx6FvJD-pn602NN8lyHNZnJHCUNeBAS06vBBuNCxf8y5A",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRe_w-8VH45UI_pJP1MFOjX-KnYaO2qajaFDmn6AthoTbtfxmUQZGKpUUU9T02suCXDvm0Z0raZR4hJdTSEakQy9S8XN0qU244nSw1iuyW658RYLsZiZmLkXA",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR67HmaApfRr6YIYFJ-uyXSb4TiWDvzqwjR4zr7CQ3ThtErDQ9o_vNpXazOy-RB4T1ydtqP8ce2MhRnFiTd0zu7EBqycXXB_b9z1l2YA5UkZrmD5khY5wmU",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTLjhgVD7_ebKYrUd4BpxlavSiX0vYYKSvutuXG7g7bo1C0hxNkgj31TWBkfXMgb4AzEB7JhxFlu-QSvd_n0ad67nJw-sOZl3DpRU3N1tLMz97ttUvLlUiA",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQk6w772nLE1cDHH2WSnolKXY5KqyJJV09i3fGme6GEb8M6bBr9t6XJgyY6O0UPMdProm2MzDLsmFCwEZWmJW9EZj0rtZkjBqvEsX3agP2cz0wXO879C7a5",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRF7lF5G3zJ3XXmSbvdSwcIkbgdOMhdhXek16H_Xpu3fDRhfrAINdhUfjrpXq2zjW7ukPIn18Nfk_U_zKJqA8WaoySZd34Y_gGkDbKjBa2d",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS6PCabRVzSOeRMvvXWV1rKf-9GFPGEp5WO8C81g_YVuMifScxPLeKBG52nsh9yY7pxwbQfT1LXa9_ZjjAaFty1ycyoF_F02XYLGuo5Vfsw"
-                ],
-                features: [
-                    { icon: "mobile-alt", text: "<strong>6.7-inch OLED Display</strong> - Stunning visuals" },
-                    { icon: "camera", text: "<strong>Triple Camera System</strong> - 108MP + Ultra-wide + Telephoto" },
-                    { icon: "bolt", text: "<strong>5G Connectivity</strong> - Ultra-fast speeds" },
-                    { icon: "battery-full", text: "<strong>All-Day Battery</strong> - 5000mAh capacity" },
-                    { icon: "microchip", text: "<strong>Latest Processor</strong> - Ultimate performance" }
-                ],
-                specs: [
-                    ["Display", "6.7-inch OLED, 120Hz refresh rate"],
-                    ["Processor", "Octa-core 3.2GHz"],
-                    ["RAM", "12GB"],
-                    ["Storage", "256GB"],
-                    ["Camera", "108MP + 12MP ultra-wide + 10MP telephoto"],
-                    ["Battery", "5000mAh with fast charging"],
-                    ["OS", "Latest Android 14"]
-                ],
-                reviews: [
-                    { name: "Alex Thompson", date: "Dec 3, 2024", stars: 5, text: "This phone is incredible! The camera quality is amazing and the display is gorgeous. 5G speeds are blazing fast." },
-                    { name: "Rachel Green", date: "Nov 30, 2024", stars: 4, text: "Great phone overall. Battery easily lasts all day. Only wish it came with a charger in the box." },
-                    { name: "Tom Anderson", date: "Nov 27, 2024", stars: 5, text: "Best smartphone I've ever owned. The performance is smooth and the photos look professional. Worth every penny!" }
-                ]
-            },
-            earbuds: {
-                title: "boAt Airdopes Alpha Wireless Earbuds",
-                price: "₹899.99",
-                originalPrice: "₹1499.99",
-                discount: "40% OFF",
-                rating: "5.0 (4,182 reviews)",
-                stars: 5,
-                description: "Premium true wireless earbuds with active noise cancellation, superior sound quality, and 30-hour battery life with charging case. IPX7 waterproof rating makes them perfect for workouts and all-weather use.",
-                images: [
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQYaQiOkDmOHfOujzbzaPZk_ySQJVfQIz8s3n5T62oCV4lvsobAgQHBJHSleCxm0OuJtQBFIfXy-U8OJCUR_sMLNw8sbYldB22yi5soq76dVUfwjeUWK9M_JA",
-                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRjV_qcvw4m1XNZP9GeoSmpsODBNVVwTi1XpSlyctgE7jUaEhcRh2OTFi_GQMdF9rDyXFRwIViaAikCo_tP6eBbgbaLTv4bs_qTxq6wR8yB4bFCO2KXyjK8xw",
-                     "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRGVaNuNRW2BVsaJjVMELGdPz48R_1fWlj0yBqYcWoy6GohSGA3SB-ufc4v-YN2vNSumKnWalMERWHfcCf0OZOkiqRkDGPYQkx-kpEd0_G3",
-                     "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS7Sdv5AUCdK-icdVuBuqu1fvspJh5USwqeUp4HfdUG4JN5O-f7bxnzTUPeeIA2H9QL8IB2jlLaDeh5SU5tWwWmK-WOnpXubnk2Th-wZmsyrV8zZ0Cpw6YG",
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRAYTVVT_0BV458yrYIMbN-IyFmcmub3TBFvsXbawD4VBLHGjmhudbpz2tx3QmVJa1sTnmjttPMy-XfswdUHoir_M2JIWjk7TastGoqmEI",
-                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTwyLqXxX0FFpTUqwJLr3Eu_kzJuS5-eqdTDuxwtxcoRMEnrZ322Xy9HLyIoLOKb8tnns9qsvWYYpFclDpJmc78VUfJCREq9z7wGoDKDQH4",
-                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSq06B5ngLzgqBPwctFMsJ_0LpSiWRwwE33uZUn-u_Z2jIuNAS4HbGaO8qX3eJN_BYdoUe5J1nqduwRowjAsWqx-N_Xdad6wr73j7Ce3kA",
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQTkZ1og1GZlBxkL_VYU3GLlyZSbmvXB-59fl7TOaoRst5V8Fx0p0B-Q1QjFRFgG2JaC1fGghle1r_ffVImSe6CDRpixE0ED0Tp9m9lejLJeoerQxvSq_cHAQ",
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTUj32BqOtmdG78O93ZRSV2JwkeDnQar0Fo8_AhaZJVOzZ058tuAgPgRGFpO1AZiRrQONhMW19YwaMoWdDtR6kc0qY-KgB-woSFt1bKujE",
-                     "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRs9hr8k8UCZpJIFlc7Bcr9Wx6MDtTUtq6dcHF3nly-gCsPpFioSarr9nhvcMGaN-reXOoHderSOg9n1mJGdrr6nwlXNz2rUHrxPCTM_xY8",
-                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQIjSLihXi31T95h0iXW1vm_CmpzX5C2Wb8WD8Sy9-nTMBzHvtdRBcWBJth_az3VhFiUzvZV7L3h1iX4QYr4_jh7adcylwllBAsPSjeqrme",
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSEEUsI3myIi25n5MS3366qLZ0UiOL1KJnIDHZ8xGQbGhPsBJFUjIg6WiHoLx_rQeD6zLdBKkBMFQJZmfAhZcvZ0pYAtM54NUdM09cQkZ8M6EsHn1-JamGk9w",
-                     "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQXwtvw_fkkETuGnkudHkJXGKATb6Vzyv7wC8JI-kGe5IYY8weWlayUAz9lFynZcz4Qh5doIH0OjqYEJNP9DHSqOdmu2MHs0p2DhksI6Yw-",
-                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ7v9bLROuQKLxpKOTA9pbMS1Icb3FPSteGT2cuRAZcEu1xcMQk7qMTlgsRKY1RWLI9mrZlPEykCpLFP3zFuALyq4JBwfXn4m1WLbTittQ"
-                ],
-                features: [
-                    { icon: "volume-up", text: "<strong>Active Noise Cancellation</strong> - Immersive audio" },
-                    { icon: "battery-full", text: "<strong>30-Hour Battery</strong> - With charging case" },
-                    { icon: "tint", text: "<strong>IPX7 Waterproof</strong> - Sweat & rain resistant" },
-                    { icon: "hand-pointer", text: "<strong>Touch Controls</strong> - Easy operation" },
-                    { icon: "microphone", text: "<strong>Clear Calls</strong> - AI noise reduction" }
-                ],
-                specs: [
-                    ["Driver Size", "10mm dynamic drivers"],
-                    ["Battery Life", "6 hours (earbuds), 30 hours (with case)"],
-                    ["Bluetooth", "5.3"],
-                    ["Water Resistance", "IPX7"],
-                    ["Charging", "USB-C fast charging, wireless charging"],
-                    ["Weight", "4.5g per earbud"],
-                    ["Controls", "Touch controls with voice assistant"]
-                ],
-                reviews: [
-                    { name: "Sophie Chen", date: "Dec 5, 2024", stars: 5, text: "These earbuds are fantastic! Sound quality rivals brands twice the price. ANC works great and they're super comfortable." },
-                    { name: "Mark Robinson", date: "Dec 2, 2024", stars: 5, text: "Perfect for the gym! The waterproof rating is legit and they stay in my ears during intense workouts. Great sound!" },
-                    { name: "Nina Patel", date: "Nov 28, 2024", stars: 5, text: "Best value earbuds on the market. Battery life is excellent and the charging case is compact. Highly recommend!" }
-                ]
-            },
-            bottle: {
-                title: "PEXPO Craft Pro 1000 Sports/Fridge Water Bottle",
-                price: "₹399.99",
-                originalPrice: "₹499.99",
-                discount: "20% OFF",
-                rating: "4.2 (892 reviews)",
-                stars: 4,
-                description: "Stay hydrated with our Smart Insulated Water Bottle. Features temperature display, hydration reminders, vacuum insulation that keeps drinks cold for 24 hours or hot for 12 hours. BPA-free and leak-proof design.",
-                images: [
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR8zzshaL00mXV_qRgS5MVAa6pAM8OKaer_EqER8kt8YBpzoO1Xdb6wU80woQrqplEAK5dM2pKzfG-qy3Hg6cMi29_xwLeligSTec0ZMQMvkK56aF5ajO1L1g",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ-XV6GD1Dmqk0c7aHMjW8zy7GxBrglEvFO_cX6xhZRdnpKNurJL8A9mHjx0X5oi2VCWaxwu250smSmb8Bq3Vbcmt4pJq1SvfFLuL1rCR1SJE8dPOCHvbeq",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTnlUYKZb5AylF_wAF7M8cXSempO63kwgjTiOZsIk7SXEK4gxAvgl8VdMp7iKxjhuuJ1FUkWPVB2L6RHiEEOQIQmnR7d2NS3EbDZPRh8j5e",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSGKsx2EswUViliS-IsFFPVxFDPQEOecF-7HhX0w-GVE9Rr4VamJIgEy52X8cc3Yh-zVgq8_u7G5lyTt5eNkC4i1_GYTef6LNGA0gHWfmg_mYtjtkv-X7rR",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS3DMSBFuZHhJcKjqy3p4ZM3dlCQ0bt6knWhvu-c4nUStZAy6bUHrZDZKBs8us4iSSOORQ8ISa8uYMf_1E2uIANNstr5qaW8aKWjFpZmQp8kpspvLXoFAcv",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQNnXlT2_Qf7OHblAotD1rBImmPev4-dsHgPqpfngDWXau2xb9lLlAuZGw0C24m_Dldpo57xjkytHZkPMp8BHmDQBw9-R4E7xXrshTMwrg",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS11rIYEFqATE3dQscbGZnkJISRlq75El3Q_oYKStWBY-quq2AFmO739LCtTAXf2vllv2VGf8YXVfotKvKoVzz2l0r54tsSj3nhNN4fkfMmfShw_1XC4Q43IA",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTAj0S0XJLXllTUTSobHK_yX2xUf222LI1Lse7FQXBcJNcmwKrBnTHVRwcDQvy_HNikYqPXl906u49pWQAdFiROp-v9sOp5WfHAY_KZvVCofl1fP5iF2UBeEg"
-                ],
-                features: [
-                    { icon: "thermometer-half", text: "<strong>Temperature Display</strong> - Digital LCD screen" },
-                    { icon: "bell", text: "<strong>Hydration Reminders</strong> - Stay on track" },
-                    { icon: "snowflake", text: "<strong>24hr Cold / 12hr Hot</strong> - Double-wall insulation" },
-                    { icon: "shield-alt", text: "<strong>BPA-Free</strong> - Safe materials" },
-                    { icon: "lock", text: "<strong>Leak-Proof</strong> - Secure lid design" }
-                ],
-                specs: [
-                    ["Capacity", "32oz (950ml)"],
-                    ["Material", "Stainless steel 18/8"],
-                    ["Insulation", "Double-wall vacuum"],
-                    ["Cold Retention", "24 hours"],
-                    ["Hot Retention", "12 hours"],
-                    ["Battery", "Replaceable CR2032 (6 months)"],
-                    ["Dimensions", "10.5 x 3 inches"]
-                ],
-                reviews: [
-                    { name: "Jennifer Lee", date: "Dec 4, 2024", stars: 4, text: "Love the temperature display! Keeps my water cold all day. The reminders help me drink more water. Wish it was slightly easier to clean." },
-                    { name: "Chris Davis", date: "Dec 1, 2024", stars: 4, text: "Great bottle for the gym and office. Insulation works perfectly. The smart features are a nice bonus." },
-                    { name: "Amanda White", date: "Nov 29, 2024", stars: 4, text: "Very happy with this purchase. Durable construction and the temp display is surprisingly accurate. Would buy again!" }
-                ]
-            },
-            tv: {
-                title: "Samsung 55-inch 4K UHD Smart TV",
-                price: "₹54,999.99",
-                originalPrice: "₹66,999.99",
-                discount: "20% OFF",
-                rating: "4.8 (1,234 reviews)",
-                stars: 4.5,
-                description: "Experience stunning visuals with our 55-inch 4K UHD Smart OLED TV. Features self-lit pixels for perfect",
-                images: [
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/0/RiBn3xIViR-eenbjaWwP1z-SAMSUNG-55DUE70B-LED-TVs-494410248-i-1-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/1/omz5aHgzhr-tDTiZL-3Ey7-SAMSUNG-55DUE70B-LED-TVs-494410248-i-2-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/2/1tOwXeT4qC-v2pVhgmKTnD-SAMSUNG-55DUE70B-LED-TVs-494410248-i-3-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/3/2KKwUbZa7w-ZwphwhKpdSt-SAMSUNG-55DUE70B-LED-TVs-494410248-i-4-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/4/yWU9UthD7U-HobDL4IloZD-SAMSUNG-55DUE70B-LED-TVs-494410248-i-5-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/5/8fNWMbIpat-cAqu6Se3O2n-SAMSUNG-55DUE70B-LED-TVs-494410248-i-6-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/6/-9m4Stf0BO-89tn9nvy4cM-SAMSUNG-55DUE70B-LED-TVs-494410248-i-7-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/7/6iz9mu2D2a-jLPQ8q5MfGu-SAMSUNG-55DUE70B-LED-TVs-494410248-i-8-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/8/pZsi-M9deb-uYPQO8hiD6Q-SAMSUNG-55DUE70B-LED-TVs-494410248-i-9-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/9/33UtZWGtJ6-tgWG9XHMFZi-SAMSUNG-55DUE70B-LED-TVs-494410248-i-10-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/10/thTzM5ZvSj-ih8wXLYjNSD-SAMSUNG-55DUE70B-LED-TVs-494410248-i-11-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/11/bf-YT_-c9r-NCTIQOvYLqB-SAMSUNG-55DUE70B-LED-TVs-494410248-i-12-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/14/yfY8kvSLHF-yhvUV4TDPAs-SAMSUNG-55DUE70B-LED-TVs-494410248-i-100-1200Wx1200H.jpeg",
-                    "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/samsung/494410248/15/nomXeACOeS3-9Ouaw4SyxEV-SAMSUNG-55DUE70B-LED-TV-494410248-BEE2024-i-300-1200Wx1200H.jpeg"
-            ],
-                features: [
-                    { icon: "tv", text: "<strong>4K UHD Resolution</strong> - Stunning clarity" },
-                    { icon: "palette", text: "<strong>Vivid Colors</strong> - Dynamic Crystal Color" },
-                    { icon: "smart-tv", text: "<strong>Smart TV</strong> - Access to apps & streaming" },
-                    { icon: "hdr", text: "<strong>HDR10+</strong> - Enhanced contrast" },
-                    { icon: "voice", text: "<strong>Voice Control</strong> - Compatible with Alexa & Google Assistant" }
-                ],
-                specs: [
-                    ["Screen Size", "55 inches"],
-                    ["Resolution", "3840 x 2160 (4K UHD)"],
-                    ["Display Type", "LED"],
-                    ["Refresh Rate", "60Hz"],
-                    ["Smart TV", "Yes, Tizen OS"],
-                    ["HDR Support", "HDR10+"],
-                    ["Connectivity", "Wi-Fi, Bluetooth, HDMI, USB"]
-                ],
-                reviews: [
-                    { name: "Michael Scott", date: "Dec 6, 2024", stars: 5, text: "Amazing picture quality and vibrant colors. The smart features are easy to use and the voice control works flawlessly." },
-                    { name: "Pam Beesly", date: "Dec 3, 2024", stars: 4, text: "Great value for the price. The 4K resolution really makes a difference. Only downside is the sound could be better." },
-                    { name: "Jim Halpert", date: "Nov 30, 2024", stars: 5, text: "Best TV I've owned! The HDR makes movies look incredible and the smart TV features are very user-friendly." }
-                ]
-            },
-            tablet: {
-                title: "Samsung Galaxy Tab A7 Lite",
-                price: "₹17499.99",
-                originalPrice: "₹19999.99",
-                discount: "30% OFF",
-                rating: "4.6 (2,156 reviews)",
-                stars: 4.5,
-                description: "Professional-grade tablet with stunning 12-inch 2K display, powerful processor, and all-day battery. Perfect for creative work, entertainment, and productivity. Includes stylus support and keyboard compatibility.",
-                images: [
-                    " https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRlXczJcmFfwBxBM0aNdk0sALc_c0wfNqBvQui1OquXE_GSZfeqWUp5yGNgrp3QBiBfHLNxcqWtYadXuFBrb7EvNnsT-iiH6EIJXzlFoD1ZRuHkJvE0jsHH",
-                    " https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ-oUQDK5fcYW-QJ2cnB9MYzbSz7ADqg1zi6Y9L8RSjToILG-EyJJTtA9JCRqSXvK1ByrdCnj9Z9C4Apvoa_3kvBnxB9_nr2uJtV3gOvXd2NFI_mRE_d9Z53w",
-                    " https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQsiOxPaXfoxn7MdPUIk_Oon9CNFXd4zis2eLSq2J0lxN2m8RT9wIxLVpT9Hs-RQzt-FIHl2sVJbgXrqGhfInQ7kVuszptgDPg5d0YmevtfRiwfSlApVnrk",
-                    " https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRPlokkoZnZFTN5boPVzSehK3p5BMc4UzqXA3looIi8I4a3YRR7o4kdGj1mls9RDkggZKHIWnQCUMvzZ1jCWZgVBIlEFlDdodWHe-5Vunl0tMpXqeifKjnsCA",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSYiD3ZgvR_EPaECwEgqZYLujM8sw5FwcQxcA3f2mh3gY0AR2bSHqCsOffz888JWB1MqYz7_g9-qgsQQvNmnGyEXG6WnFdbB1t8A4sDD-uqfqoPi62CGv8g",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRl6V2WF4jUCzpCoNsbOE2fPSdLycA7OFbyWKScW6YjZouusZ0DEMNfE66To5cvHvIJG0J72-IMHswRGQgiYmSj8zINgEjWsZ6gS1jzfj76LKu9usj9dOEb",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT6MH-CKCfkYPEdvgSvJrXHXCglXnslTrYQPPqcZlzUm0cJF0XpeZZY_ladUMXM-PnEFNjDDKtDdmfElTe94oMlq8ZrFVGuEof-Ch44FpICZOEB2JqklBUY",
-                    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTPUz71cnLuwXLVt5_QIs0n_qUIbVeUbbCFy9TBCGTsvc6RDIriVpVZIsCVfck6GbcNQ4Q3Qda__T5Uq-gXwsJsKQDkib7i5EP1LcODS8yjnELUJMtPGZQ",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ-jd-u-QeN0Q15ZVEFfkpftmG_IFCfBKqipVPOG0jp6JLiZpqniNFvKBSMAB4e2XwDVFfbm9_qTkLNw4KnnYqPNZUbwIKx0gNfcEF2x0Qkl08xRObN5iN6",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSTAMhO9V7-sBCAEa_A5qb65l5JTehR9bCPl3jS3XQ2qdgD5cdY2Y8JOO-jgWVJSjDZ7169bM8o8r-rkuqn3LkTH5PukeRD2_5uBqjfFQ2tGRHoBMs9wumj",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSnTwYUupQlBjItTipEGh4U-j6C9ws2UcLkm0iaq1XB6A4L-FQIlALb5KLrm4x7Lmi51D6vkhqJ8CoFrSyBqxXOXh-4rm5Y9umCKBU7LyW4DWUg1vWSTgxc",
-                    "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRHzhuidCILbhMetHmMJpgO5nB3qHKqTjLcz_CNKcyP3wPIYYao8q4FLo4M0Xhd0ZZQjaHLMhuyzyEoOxeD4CJ7ePSl9z_-lHKyOoGUZ-J5w9alFV_5pLydCw"
-                ],
-                features: [
-                    { icon: "tablet-alt", text: "<strong>12-inch 2K Display</strong> - Crystal clear visuals" },
-                    { icon: "microchip", text: "<strong>Powerful Processor</strong> - Smooth multitasking" },
-                    { icon: "pencil-alt", text: "<strong>Stylus Support</strong> - Precision drawing" },
-                    { icon: "keyboard", text: "<strong>Keyboard Compatible</strong> - Full productivity" },
-                    { icon: "battery-full", text: "<strong>10-Hour Battery</strong> - All-day use" }
-                ],
-                specs: [
-                    ["Display", "12-inch 2560x1600 IPS LCD"],
-                    ["Processor", "Octa-core 2.8GHz"],
-                    ["RAM", "8GB"],
-                    ["Storage", "256GB (expandable)"],
-                    ["Camera", "13MP rear, 8MP front"],
-                    ["Battery", "10,000mAh"],
-                    ["OS", "Latest Android 14"]
-                ],
-                reviews: [
-                    { name: "Kevin Martinez", date: "Dec 6, 2024", stars: 5, text: "Excellent tablet for work and play. The display is gorgeous and the performance is snappy. Stylus is responsive and accurate." },
-                    { name: "Laura Brown", date: "Dec 3, 2024", stars: 4, text: "Great for digital art and note-taking. Battery life is solid. Speakers could be louder but overall very satisfied." },
-                    { name: "Daniel Kim", date: "Nov 30, 2024", stars: 5, text: "Perfect for my needs! Use it for video editing and it handles everything smoothly. Best tablet in this price range." }
-                ]
-            }
-        };
-
-        function showProductDetail(productId) {
-            const product = productData[productId];
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('productDetailPage').style.display = 'block';
-            window.scrollTo(0, 0);
-
-            document.getElementById('detailTitle').textContent = product.title;
-            document.getElementById('detailPrice').textContent = product.price;
-            document.getElementById('detailOriginalPrice').textContent = product.originalPrice;
-            document.getElementById('detailDiscount').textContent = product.discount;
-            document.getElementById('detailRating').textContent = product.rating;
-            document.getElementById('detailDescription').textContent = product.description;
-
-            const starsHtml = generateStars(product.stars);
-            document.getElementById('detailStars').innerHTML = starsHtml;
-
-            document.getElementById('mainImage').src = product.images[0];
-
-            const thumbnailHtml = product.images.map((img, index) => 
-                `<img src="${img}" alt="View ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeImage(this)">`
-            ).join('');
-            document.getElementById('thumbnailContainer').innerHTML = thumbnailHtml;
-
-            const featuresHtml = product.features.map(f => 
-                `<li><i class="fas fa-${f.icon}"></i> ${f.text}</li>`
-            ).join('');
-            document.getElementById('featureList').innerHTML = featuresHtml;
-
-            const specsHtml = product.specs.map(spec => 
-                `<tr><td>${spec[0]}</td><td>${spec[1]}</td></tr>`
-            ).join('');
-            document.getElementById('specsTable').innerHTML = specsHtml;
-
-            const reviewsHtml = product.reviews.map(review => `
-                <div class="review-card">
-                    <div class="review-header">
-                        <span class="reviewer-name"><i class="fas fa-user-circle"></i> ${review.name}</span>
-                        <span class="review-date">${review.date}</span>
-                    </div>
-                    <div class="review-stars">${generateStars(review.stars)}</div>
-                    <p class="mb-0">${review.text}</p>
-                </div>
-            `).join('');
-            document.getElementById('reviewsContainer').innerHTML = reviewsHtml;
-        }
-
-        function generateStars(rating) {
-            let html = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 !== 0;
-
-            for (let i = 0; i < fullStars; i++) {
-                html += '<i class="fas fa-star"></i>';
-            }
-            if (hasHalfStar) {
-                html += '<i class="fas fa-star-half-alt"></i>';
-            }
-            const emptyStars = 5 - Math.ceil(rating);
-            for (let i = 0; i < emptyStars; i++) {
-                html += '<i class="far fa-star"></i>';
-            }
-            return html;
-        }
-
-        function showHomePage() {
-            document.getElementById('homePage').style.display = 'block';
-            document.getElementById('productDetailPage').style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-
-        function changeImage(thumbnail) {
-            const mainImage = document.getElementById('mainImage');
-            const thumbnails = document.querySelectorAll('.thumbnail');
-            
-            thumbnails.forEach(t => t.classList.remove('active'));
-            thumbnail.classList.add('active');
-            
-            mainImage.style.opacity = '0';
-            setTimeout(() => {
-                mainImage.src = thumbnail.src;
-                mainImage.style.opacity = '1';
-            }, 200);
-        }
-
-        function increaseQty() {
-            const qtyInput = document.getElementById('quantity');
-            let currentQty = parseInt(qtyInput.value);
-            if (currentQty < 10) {
-                qtyInput.value = currentQty + 1;
-            }
-        }
-
-        function decreaseQty() {
-            const qtyInput = document.getElementById('quantity');
-            let currentQty = parseInt(qtyInput.value);
-            if (currentQty > 1) {
-                qtyInput.value = currentQty - 1;
-            }
-        }
-     
-        function addToCart() {
-            const quantity = parseInt(document.getElementById('quantity').value);
-            cartCount += quantity;
-            document.getElementById('cartCount').textContent = cartCount;
-            
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        }
-
-        function filterProducts(category) {
-            const buttons = document.querySelectorAll('.category-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const products = document.querySelectorAll('.product-item');
-            products.forEach(product => {
-                if (category === 'all' || product.dataset.category === category) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-        }
-    </script>
+<!-- Cart Sidebar -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+        <button class="close-cart" onclick="toggleCart()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+        <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Your cart is empty</p>
+        </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotalPrice">₹0.00</span>
+        </div>
+        <button class="checkout-btn" onclick="proceedToCheckout()">
+            <i class="fas fa-credit-card"></i> Proceed to Checkout
+        </button>
+    </div>
+</div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="E-commerce.js"></script>
 </body>
 </html>
