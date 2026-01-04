@@ -482,7 +482,6 @@ let currentProductId = null;
                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ47LeKimvNZXm4fUvcRNq5liv3mjdIMn3BnX0OxxTh4jBgEjqS3c4efmIN8jPIjClEsZ4XuWLihX2VK8JwQooxzWdc6ALP",
                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTie1k3lAyuaT2c0b27HYjz15Th17WV7bm_ySsAT4QAhwGZngL0IllrgK9MJM0VIBE-Vh6Nzc6nmtmZ6CHklrakYzn2k-cdzh5nIUc1PU60K1rJ3bl7bf2Z",
                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRQTBr_m0gACGoAl_1GffXA9nJbGIeV2dBnGmonqlYbnYi816UsIoRrpJm9FVrif_moSGAgb9ZfgvTFym68FzEKDTQcNeOT9Gx7YnOSkOYgCzSIe0G2vkY4UA",
-                    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRNNaV9P5d1qjAPhkjdEYFVqEcn8wbX4U88AkgkoRZFV2O6etzzULmytjCI_dRH2U53UP6cU88yJE15bnyD3ZC-USbF1fVbvpHT2rdBkvlsaoRxI5lJIgw",
                     "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRjdWCw9KdbDaIHBBWmoHstQZN7cCBf5fAcA5f_IMllTsOJcjn7N9wLYXQonV7jmoxDbTuv7w6arg8XULmE-WmJljP9aCBss0IpXzxAhc0nhCZ9r6rKegc4-4jx",
                     "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSGxpQ51itEN1qRTBLeik_4rQFHkkP1sVkWcN5rOTuEgyjXyZvcrbV5-7nwUQqLF8k6tRXwqAGO3ML4fm29dCID_ERUJTYbEO26I2BR0jsZMBN1e9Ur3Ex7WQ",
                     "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSc4-uLdJ8O80bRZ10Lhc6jPvg_Yu5jaAfZp77dmSXeuGS7jfBIE7fQ9HGqUPF6GBNJHyZqWO0M6gkyKZUvULjKIIKeNE77kWx1pn_ouEK7UUIhsgPVCA6vXAw",
@@ -889,5 +888,6 @@ function filterProducts(category) {
     });
 
 }
+
 
 
