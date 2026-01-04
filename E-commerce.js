@@ -604,7 +604,7 @@ let currentProductId = null;
             },
             earbuds2: {
                 title: "CMF by Nothing Neckband Pro 50dB Active Noise Cancellation",
-                price: "₹1,999.00",
+                price: "₹1,199.00",
                 originalPrice: "₹1,499.00",
                 discount: "35% OFF",
                 rating: "4.5 (1,234 reviews)",
@@ -889,4 +889,5 @@ function filterProducts(category) {
     });
 
 }
+
 
